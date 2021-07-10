@@ -41,9 +41,9 @@ function checkDatabase() {
             }).then((result) => result.json())
                 .then((res) => {
                     if (res.length !== 0) {
-                        transaction = database.transaction(['BudgetDB'], 'readwrite');
+                        transaction = database.transaction(['BudgetStore'], 'readwrite');
 
-                        const presentData = transaction.objectStore('BudgetDB');
+                        const presentData = transaction.objectStore('BudgetStore');
                         presentData.clear();
                         console.log('clearing data')
                     }
