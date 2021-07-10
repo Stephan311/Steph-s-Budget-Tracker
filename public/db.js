@@ -44,14 +44,26 @@ function checkDatabase() {
             .then((res) => {
                 if(res.length !== 0) {
                     purchase = database.purchase(['BudgetDB'], 'readwrite');
+
+                    const presentData = purchase.objectStore('BudgetDB');
+                    presentData.clear();
+                    console.log('clearing data')
                 }
             });
         }
     }
 }
 
+request.onsuccess = function (e) {
+    console.log('success!');
+    database = e.target.result
 
+if(navigator.onLine) {
+    console.log('Program back online')
+    checkDatabase;
 
+}
+}
 
 const saveRecord = (record) => {
     console.log('Record has been saved');
