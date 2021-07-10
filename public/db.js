@@ -19,3 +19,8 @@ if (database.objectNames.length === 0) {
 }
 
 };
+
+const saveRecord = (record) => {
+    console.log('Record has been saved');
+    const purchase = db.purchase(['BudgetDB'], 'readrite');
+}
