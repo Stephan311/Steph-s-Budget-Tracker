@@ -1,14 +1,21 @@
-const request = indexedDB.open("firstDatabase", 1);
 
-request.onsuccess = event => {
-    console.log(request.result);
-  }
+let database;
+let budgetTracker
 
-  request.onupgradeneeded = ( { target }) => {
-      const db = target.result;
-      const objectStore = db.createObjectStore("Finances")
-  };
+const request = indexedDB.open("ExpenseDB", budgetTracker || 21);
 
-  request.onsuccess = event => {
-      console.log(request.result);
-  }
+request.onupgradeneeded = function (e) {
+    console.log('Upgrade needed in IndexDB')
+
+const { previousVersion } = e;
+const newerVersion = e.newerVersion || database.version;
+
+console.log(`Databse has been updated from ${previousVersion} to ${newerVersion}`);
+
+db = e.target.result;
+
+if (database.objectNames.length === 0) {
+    database.createObjectStore('BudgetDB', {autoincrement: true});
+}
+
+};
